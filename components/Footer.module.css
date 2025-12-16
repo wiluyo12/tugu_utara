@@ -1,0 +1,42 @@
+.footer {
+    background-color: rgba(68, 116, 63, 0.85);
+    color: white;
+    padding: 40px 20px;
+    margin-top: 60px;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.column {
+    flex: 1;
+    min-width: 200px;
+}
+
+.column h3 {
+    color: white;
+    margin-bottom: 20px;
+}
+
+.column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.column li {
+    margin-bottom: 10px;
+}
+
+.bottom {
+    text-align: center;
+    margin-top: 40px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 20px;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}

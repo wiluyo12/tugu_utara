@@ -1,0 +1,203 @@
+.card {
+    background: white;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: scale(1.03);
+    box-shadow: var(--shadow-lg);
+}
+
+.imageContainer {
+    height: 250px;
+    overflow: hidden;
+    position: relative;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.card:hover .image {
+    transform: scale(1.05);
+}
+
+.content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.category {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: var(--color-moss-light);
+    font-weight: 600;
+    margin-bottom: 5px;
+    letter-spacing: 0.5px;
+}
+
+.title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-text-main);
+    margin-bottom: 10px;
+}
+
+.footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.price {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-brown);
+}
+
+.btn {
+    background: var(--color-sand);
+    color: var(--color-text-main);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn:hover {
+    background: var(--color-moss-green);
+    color: white;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: auto;
+}
+
+.qtySelector {
+    display: flex;
+    align-items: center;
+    background: #f0f0f0;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.qtyBtn {
+    background: none;
+    border: none;
+    width: 30px;
+    height: 30px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-main);
+    transition: background 0.2s;
+}
+
+.qtyBtn:hover {
+    background: #ddd;
+}
+
+.qtyValue {
+    font-size: 0.9rem;
+    font-weight: 600;
+    width: 20px;
+    text-align: center;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.overlay.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.checkIcon {
+    width: 50px;
+    height: 50px;
+    background: var(--color-moss-green);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    transform: scale(0);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.overlay.visible .checkIcon {
+    transform: scale(1);
+}
+
+.successText {
+    font-weight: 600;
+    color: var(--color-moss-green);
+}
+
+@media (max-width: 640px) {
+    .imageContainer {
+        height: 200px;
+    }
+
+    .content {
+        padding: 15px;
+    }
+
+    .title {
+        font-size: 1rem;
+    }
+
+    .controls {
+        flex-wrap: wrap;
+    }
+
+    .qtySelector {
+        flex-grow: 1;
+        justify-content: space-between;
+    }
+
+    .qtySelector .qtyBtn {
+        width: 40px;
+        /* larger touch target */
+    }
+
+    .btn {
+        flex-grow: 1;
+        /* Button takes available space */
+        padding: 8px 10px;
+        text-align: center;
+    }
+}

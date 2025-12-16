@@ -1,66 +1,36 @@
-import Image from "next/image";
+import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
+import ProductCard from "@/components/ProductCard";
+import Footer from "@/components/Footer";
 import styles from "./page.module.css";
+import Link from 'next/link';
 
 export default function Home() {
+  const featuredProducts = [
+    { id: 1, name: "Traditional Bamboo Basket", category: "Handicrafts", price: 75000, image: "/assets/product-basket.png" },
+    { id: 2, name: "Organic Tugu Green Tea", category: "Agricultural", price: 45000, image: "/assets/product-basket.png" }, // Reusing image for demo
+    { id: 3, name: "Gula Aren Asli (Palm Sugar)", category: "Food", price: 30000, image: "/assets/product-basket.png" },
+    { id: 4, name: "Handwoven Rattan Mat", category: "Handicrafts", price: 125000, image: "/assets/product-basket.png" },
+  ];
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className={styles.intro}>
-          <h1>To get started, edit the page.js file.</h1>
-          <p>
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main>
+      <Navbar />
+      <Hero />
+
+      <section className={`container ${styles.section}`}>
+        <h2 className={styles.sectionTitle}>Produk Unggulan</h2>
+        <div className={styles.grid}>
+          {featuredProducts.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
         </div>
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className={styles.secondary}
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <div className={styles.exploreLink}>
+          <Link href="/products">Lihat Semua Produk &rarr;</Link>
         </div>
-      </main>
-    </div>
+      </section>
+
+      <Footer />
+    </main>
   );
 }

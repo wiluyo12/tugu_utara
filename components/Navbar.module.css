@@ -1,0 +1,138 @@
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    background: rgba(68, 116, 63, 0.85);
+    /* Cream with opacity */
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.navLinks {
+    display: flex;
+    gap: 30px;
+}
+
+.link {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-text-main);
+    position: relative;
+}
+
+.adminLink {
+    color: #ffffff !important;
+}
+
+.link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--color-moss-green);
+    transition: width 0.3s;
+}
+
+.link:hover::after {
+    width: 100%;
+}
+
+.actions {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.cartIcon {
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: var(--color-brown);
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 0 20px;
+    }
+
+    .navLinks {
+        display: none;
+    }
+
+    .hamburger {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        width: 30px;
+        height: 25px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        z-index: 101;
+    }
+
+    .bar {
+        width: 30px;
+        height: 3px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        transition: all 0.3s linear;
+        position: relative;
+        transform-origin: 1px;
+    }
+
+    /* Mobile Menu Container */
+    .mobileMenu {
+        position: absolute;
+        top: 70px;
+        /* Below navbar */
+        left: 0;
+        width: 100%;
+        background: rgba(68, 116, 63, 0.85);
+        backdrop-filter: blur(15px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0;
+        gap: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transform: translateY(-150%);
+        transition: transform 0.4s ease-in-out;
+        z-index: 99;
+    }
+
+    .open {
+        transform: translateY(0);
+    }
+
+    .mobileMenu .link {
+        font-size: 1.2rem;
+        color: #ffffff;
+    }
+}
+
+@media (min-width: 769px) {
+    .hamburger {
+        display: none;
+    }
+
+    .mobileMenu {
+        display: none;
+    }
+}
