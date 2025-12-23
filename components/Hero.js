@@ -10,7 +10,7 @@ export default function Hero() {
             </p>
             <div className={styles.ctaContainer}>
                 <Link href="/products">
-                    <button className="btn-primary" style={{ fontSize: '1.2rem', padding: '15px 40px' }}>
+                    <button className={styles.ctaButton}>
                         Jelajahi Pasar
                     </button>
                 </Link>

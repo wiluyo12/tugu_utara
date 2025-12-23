@@ -26,6 +26,13 @@ export default function ProductCard({ product }) {
     const increaseQty = () => setQuantity(q => q + 1);
     const decreaseQty = () => setQuantity(q => Math.max(1, q - 1));
 
+    const categoryMap = {
+        'Handicrafts': 'Kerajinan Tangan',
+        'Food': 'Makanan',
+        'Agricultural': 'Pertanian',
+        'Traditional': 'Tradisional' // Fallback/Extra
+    };
+
     return (
         <div className={styles.card}>
             <div className={styles.imageContainer}>
@@ -43,7 +50,7 @@ export default function ProductCard({ product }) {
                 </div>
             </div>
             <div className={styles.content}>
-                <span className={styles.category}>{product.category}</span>
+                <span className={styles.category}>{categoryMap[product.category] || product.category}</span>
                 <h3 className={styles.title}>{product.name}</h3>
                 <div className={styles.footer}>
                     <span className={styles.price}>Rp {Number(product.price).toLocaleString('id-ID')}</span>

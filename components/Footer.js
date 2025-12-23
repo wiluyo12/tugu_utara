@@ -16,7 +16,8 @@ export default function Footer() {
                         <li><a href="/">Beranda</a></li>
                         <li><a href="/products">Pasar</a></li>
                         <li><a href="/sceneries">Wisata</a></li>
-                        <li><a href="/about">Tentang Kami</a></li>
+
+                        <li><a href="/cart">Keranjang</a></li>
                     </ul>
                 </div>
                 <div className={styles.column}>

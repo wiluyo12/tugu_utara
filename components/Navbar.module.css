@@ -2,22 +2,29 @@
     position: sticky;
     top: 0;
     z-index: 100;
-    height: 70px;
+    height: 50px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 40px;
-    background: rgba(68, 116, 63, 0.85);
+    /*background: rgba(68, 116, 63, 0.85);
     /* Cream with opacity */
-    backdrop-filter: blur(12px);
+    backdrop-filter: blur(20px);
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     transition: all 0.3s ease;
 }
 
+.fixed {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    /* Optional: verify if background needs adjustment. Keeping default blurry style is usually good */
+}
+
 .logo {
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: 700;
-    color: #ffffff;
+    color: #faf5f5;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -35,7 +42,7 @@
 }
 
 .adminLink {
-    color: #ffffff !important;
+    color: #f8f8f8 !important;
 }
 
 .link::after {
@@ -45,6 +52,7 @@
     height: 2px;
     bottom: -4px;
     left: 0;
+    backdrop-filter: blur(20px);
     background-color: var(--color-moss-green);
     transition: width 0.3s;
 }
@@ -84,6 +92,7 @@
         border: none;
         cursor: pointer;
         padding: 0;
+        margin-right: 40px;
         z-index: 101;
     }
 
@@ -104,7 +113,7 @@
         /* Below navbar */
         left: 0;
         width: 100%;
-        background: rgba(68, 116, 63, 0.85);
+        background: rgba(12, 12, 12, 0.85);
         backdrop-filter: blur(15px);
         display: flex;
         flex-direction: column;

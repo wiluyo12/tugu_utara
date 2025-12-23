@@ -195,9 +195,9 @@ export default function AdminDashboard() {
                                         value={newProduct.category}
                                         onChange={e => setNewProduct({ ...newProduct, category: e.target.value })}
                                     >
-                                        <option value="Handicrafts">Handicrafts</option>
-                                        <option value="Food">Food</option>
-                                        <option value="Agriculture">Agriculture</option>
+                                        <option value="Handicrafts">Kerajinan Tangan</option>
+                                        <option value="Food">Makanan</option>
+                                        <option value="Agricultural">Pertanian</option>
                                     </select>
                                 </div>
                                 <div className={styles.formGrid}>

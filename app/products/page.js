@@ -36,14 +36,14 @@ export default function Market() {
             <div className={`container ${styles.container}`}>
                 <aside className={styles.sidebar}>
                     <div className={styles.filterGroup}>
-                        <h3 className={styles.filterTitle}>Category</h3>
+                        <h3 className={styles.filterTitle}>Kategori</h3>
                         <label className={styles.filterLabel}>
                             <input
                                 type="radio"
                                 name="category"
                                 checked={filter === 'All'}
                                 onChange={() => setFilter('All')}
-                            /> All
+                            /> Semua
                         </label>
                         <label className={styles.filterLabel}>
                             <input
@@ -51,7 +51,7 @@ export default function Market() {
                                 name="category"
                                 checked={filter === 'Handicrafts'}
                                 onChange={() => setFilter('Handicrafts')}
-                            /> Handicrafts
+                            /> Kerajinan Tangan
                         </label>
                         <label className={styles.filterLabel}>
                             <input
@@ -59,7 +59,15 @@ export default function Market() {
                                 name="category"
                                 checked={filter === 'Food'}
                                 onChange={() => setFilter('Food')}
-                            /> Food
+                            /> Makanan
+                        </label>
+                        <label className={styles.filterLabel}>
+                            <input
+                                type="radio"
+                                name="category"
+                                checked={filter === 'Agricultural'}
+                                onChange={() => setFilter('Agricultural')}
+                            /> Pertanian
                         </label>
                     </div>
                 </aside>

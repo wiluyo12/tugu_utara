@@ -39,6 +39,24 @@
     opacity: 0;
 }
 
+.ctaButton {
+    background: transparent;
+    /* Remove background color */
+    border: 2px solid white;
+    color: white;
+    padding: 15px 40px;
+    border-radius: 50px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.ctaButton:hover {
+    background: white;
+    color: var(--color-moss-green);
+}
+
 @keyframes fadeInDown {
     from {
         opacity: 0;

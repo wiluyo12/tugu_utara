@@ -1,8 +1,9 @@
 .footer {
-    background-color: rgba(68, 116, 63, 0.85);
-    color: white;
+    background-color: rgba(249, 246, 246, 0.409);
+    color: black;
     padding: 40px 20px;
     margin-top: 60px;
+    backdrop-filter: blur(20px);
 }
 
 .content {
@@ -19,7 +20,7 @@
 }
 
 .column h3 {
-    color: white;
+    color: black;
     margin-bottom: 20px;
 }
 
