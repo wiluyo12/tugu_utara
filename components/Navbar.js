@@ -24,7 +24,9 @@ export default function Navbar() {
             <div className={styles.navLinks}>
                 <Link href="/" className={styles.link}>Beranda</Link>
                 <Link href="/products" className={styles.link}>Pasar</Link>
-                <Link href="/sceneries" className={styles.link}>Wisata</Link>                <Link href="/about" className={styles.link}>Tentang Kami</Link>
+                <Link href="/sceneries" className={styles.link}>Wisata</Link>
+                <Link href="/cart" className={styles.link}>Keranjang</Link>
+                <Link href="/admin" className={styles.link}>Admin Login</Link>
             </div>
 
             <div className={styles.actions}>

@@ -1,10 +1,11 @@
 .section {
-  padding: 80px 0;
+  padding: 20px;
+  padding-top: 1px;
 }
 
 .sectionTitle {
-  text-align: center;
-  margin-bottom: 50px;
+  text-align: left;
+  margin-bottom: 40px;
   font-size: 2.5rem;
   color: var(--color-wood);
   position: relative;

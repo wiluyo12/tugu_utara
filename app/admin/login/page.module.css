@@ -1,0 +1,148 @@
+.container {
+    display: flex;
+    min-height: 100vh;
+    background-color: var(--color-off-white);
+}
+
+.imageSection {
+    flex: 1;
+    position: relative;
+    display: none;
+}
+
+.image {
+    object-fit: cover;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.2);
+    /* Slight overlay for better text contrast if needed */
+}
+
+.formSection {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    background-color: var(--color-white);
+}
+
+.formContainer {
+    width: 100%;
+    max-width: 400px;
+    padding: 40px;
+    background: white;
+    /* Optional: Remove shadow/card style if using split screen plain background, 
+       but keeping it clean is good. */
+}
+
+.heading {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    color: var(--color-wood);
+}
+
+.subHeading {
+    text-align: center;
+    color: var(--color-text-soft);
+    margin-bottom: 40px;
+    font-size: 0.95rem;
+}
+
+.formGroup {
+    margin-bottom: 20px;
+}
+
+.label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--color-wood);
+    font-size: 0.9rem;
+}
+
+.inputWrapper {
+    position: relative;
+}
+
+.input {
+    width: 100%;
+    height: 48px;
+    padding: 10px 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    color: var(--color-text-main);
+    transition: all 0.2s;
+    background-color: #fafafa;
+}
+
+.input:focus {
+    outline: none;
+    border-color: var(--color-moss-light);
+    background-color: white;
+    box-shadow: 0 0 0 3px rgba(74, 93, 35, 0.1);
+}
+
+.toggleBtn {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-text-soft);
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+
+.toggleBtn:hover {
+    color: var(--color-wood);
+}
+
+.infoBox {
+    background-color: var(--color-cream);
+    padding: 15px;
+    border-radius: var(--radius-md);
+    margin-bottom: 25px;
+    font-size: 0.85rem;
+    color: var(--color-wood);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.submitBtn {
+    width: 100%;
+    height: 48px;
+    background-color: var(--color-moss-green);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.submitBtn:hover {
+    background-color: var(--color-wood);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.submitBtn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+@media (min-width: 768px) {
+    .imageSection {
+        display: block;
+    }
+}
