@@ -47,7 +47,7 @@ export default function ProductDetail({ params }) {
                             <button className={styles.qtyBtn}>+</button>
                         </div>
                         <button className="btn-primary" style={{ padding: '12px 40px', fontSize: '1.1rem' }}>
-                            Add to Cart
+                            Maukan Keranjang
                         </button>
                     </div>
                 </div>

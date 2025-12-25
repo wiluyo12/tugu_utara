@@ -17,7 +17,7 @@ export default function Navbar() {
     return (
         <nav className={`${styles.navbar} ${isHomepage ? styles.fixed : ''}`}>
             <Link href="/" className={styles.logo}>
-                TUGU UTARA
+                Tugu Utara
             </Link>
 
             {/* Desktop Links*/}

@@ -9,7 +9,7 @@ const outfit = Outfit({
 
 export const metadata = {
   title: "Tugu Utara - Scenery & Market",
-  description: "Experience the beauty of Tugu Utara Village and shop local products.",
+  description: "Nikmati keindahan Desa Tugu Utara dan beli produk lokal.",
 };
 
 import { CartProvider } from "@/context/CartContext";

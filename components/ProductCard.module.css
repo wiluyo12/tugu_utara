@@ -89,6 +89,32 @@
     align-items: center;
     gap: 10px;
     margin-top: auto;
+    flex-wrap: wrap;
+    /* Allow wrapping for the address input */
+}
+
+.addressInputWrapper {
+    width: 100%;
+    margin-bottom: 2px;
+}
+
+.addressInput {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background: #f9f9f9;
+}
+
+.addressInput:focus {
+    border-color: var(--color-moss-green);
+    background: white;
+    box-shadow: 0 0 0 2px rgba(97, 122, 85, 0.1);
+    /* Moss green tint */
 }
 
 .qtySelector {

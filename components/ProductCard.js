@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import styles from './ProductCard.module.css';
 import { useCart } from '@/context/CartContext';
+import AddToCartNotification from './AddToCartNotification'; // Import notification logic
 
 import { useRouter } from 'next/navigation';
 
@@ -10,17 +11,24 @@ export default function ProductCard({ product }) {
     const { addToCart } = useCart();
     const [quantity, setQuantity] = useState(1);
     const [isAdded, setIsAdded] = useState(false);
+    const [address, setAddress] = useState(''); // State for address/notes
+    const [showNotification, setShowNotification] = useState(false); // State for notification
     const router = useRouter();
 
     const handleAddToCart = () => {
-        addToCart(product, quantity);
+        // Pass address along with product data
+        addToCart({ ...product, address }, quantity);
         setIsAdded(true);
-        // Show animation briefly then redirect
+        setShowNotification(true); // Show notification instead of redirecting
+
+        // Reset local state
+        setQuantity(1);
+        setAddress('');
+
+        // Hide success overlay after a short delay (for the button effect)
         setTimeout(() => {
             setIsAdded(false);
-            router.push('/cart');
-        }, 500);
-        setQuantity(1); // Reset quantity after adding
+        }, 1500);
     };
 
     const increaseQty = () => setQuantity(q => q + 1);
@@ -62,11 +70,21 @@ export default function ProductCard({ product }) {
                         <span className={styles.qtyValue}>{quantity}</span>
                         <button className={styles.qtyBtn} onClick={increaseQty}>+</button>
                     </div>
+
+
+
                     <button className={styles.btn} onClick={handleAddToCart}>
-                        Add to Cart
+                        Beli Sekarang
                     </button>
                 </div>
             </div>
+
+            {/* Custom Notification */}
+            <AddToCartNotification
+                product={product}
+                visible={showNotification}
+                onClose={() => setShowNotification(false)}
+            />
         </div>
     );
 }

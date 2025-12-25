@@ -46,8 +46,8 @@ export default function AdminLogin() {
             {/* Right Side - Login Form */}
             <div className={styles.formSection}>
                 <div className={styles.formContainer}>
-                    <h1 className={styles.heading}>Welcome Back</h1>
-                    <p className={styles.subHeading}>Sign in to manage your dashboard</p>
+                    <h1 className={styles.heading}>Selamat Datang</h1>
+                    <p className={styles.subHeading}>Jadilah admin yang baik dan jujur </p>
 
                     <form onSubmit={handleLogin}>
                         {/* EMAIL */}
@@ -59,7 +59,7 @@ export default function AdminLogin() {
                                 onChange={(e) => setEmail(e.target.value)}
                                 className={styles.input}
                                 required
-                                placeholder="Enter your email"
+                                placeholder="Maukan E-Mail"
                             />
                         </div>
 
@@ -73,7 +73,7 @@ export default function AdminLogin() {
                                     onChange={(e) => setPassword(e.target.value)}
                                     className={styles.input}
                                     required
-                                    placeholder="Enter your password"
+                                    placeholder="Masukan Pasword"
                                 />
                                 <button
                                     type="button"
@@ -102,7 +102,7 @@ export default function AdminLogin() {
                         <div className={styles.infoBox}>
                             <strong>Demo Credentials:</strong><br />
                             Email: admin1@admin.com<br />
-                            Pass: admin
+                            Password: admin
                         </div>
 
                         <button type="submit" disabled={loading} className={styles.submitBtn}>

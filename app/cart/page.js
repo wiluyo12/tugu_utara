@@ -4,14 +4,18 @@ import Footer from "@/components/Footer";
 import styles from "./page.module.css";
 import Image from "next/image";
 import { useCart } from "@/context/CartContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabaseClient";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function Checkout() {
     const { cart, total, removeFromCart, clearCart } = useCart();
     const router = useRouter();
     const [loading, setLoading] = useState(false);
+    const [paymentMethod, setPaymentMethod] = useState('transfer');
+    const [proofFile, setProofFile] = useState(null);
+    const [myOrders, setMyOrders] = useState([]);
     const [formData, setFormData] = useState({
         fullName: '',
         address: '',
@@ -21,8 +25,32 @@ export default function Checkout() {
     const shippingCost = 15000;
     const finalTotal = total + shippingCost;
 
+    // Load orders from localStorage
+    useEffect(() => {
+        const fetchMyOrders = async () => {
+            const storedOrders = JSON.parse(localStorage.getItem('my_orders') || '[]');
+            if (storedOrders.length > 0) {
+                const { data, error } = await supabase
+                    .from('orders')
+                    .select('*')
+                    .in('id', storedOrders)
+                    .order('created_at', { ascending: false });
+
+                if (data) setMyOrders(data);
+            }
+        };
+
+        fetchMyOrders();
+    }, []);
+
     const handleInput = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
+    };
+
+    const handleFileChange = (e) => {
+        if (e.target.files && e.target.files[0]) {
+            setProofFile(e.target.files[0]);
+        }
     };
 
     const handleCheckout = async () => {
@@ -31,7 +59,34 @@ export default function Checkout() {
             return;
         }
 
+        if (paymentMethod === 'transfer' && !proofFile) {
+            alert("Please upload proof of payment");
+            return;
+        }
+
         setLoading(true);
+
+        let proofUrl = null;
+
+        // Upload Proof if exists
+        if (proofFile) {
+            const fileName = `${Date.now()}_${formData.fullName.replace(/\s+/g, '_')}`;
+            const { data: uploadData, error: uploadError } = await supabase.storage
+                .from('payment_proofs')
+                .upload(fileName, proofFile);
+
+            if (uploadError) {
+                alert("Error uploading proof: " + uploadError.message);
+                setLoading(false);
+                return;
+            }
+
+            const { data: publicUrlData } = supabase.storage
+                .from('payment_proofs')
+                .getPublicUrl(fileName);
+
+            proofUrl = publicUrlData.publicUrl;
+        }
 
         const { data: order, error: orderError } = await supabase
             .from('orders')
@@ -41,7 +96,8 @@ export default function Checkout() {
                     address: formData.address,
                     city: formData.city,
                     total: finalTotal,
-                    status: 'pending'
+                    status: 'verifying', // Set to verifying for manual check
+                    payment_proof_url: proofUrl
                 }
             ])
             .select()
@@ -69,132 +125,226 @@ export default function Checkout() {
             console.error("Error creating items:", itemsError);
         }
 
+        // SAVE ORDER ID TO LOCAL STORAGE
+        const existingOrders = JSON.parse(localStorage.getItem('my_orders') || '[]');
+        const updatedOrders = [order.id, ...existingOrders];
+        localStorage.setItem('my_orders', JSON.stringify(updatedOrders));
+
         setLoading(false);
         clearCart();
-        alert("Order placed successfully!");
-        router.push('/');
+        alert("Order placed successfully! We will verify your payment shortly.");
+        // We stay on the page to show the status
+        window.location.reload();
     };
 
-    if (cart.length === 0) {
-        return (
-            <main>
-                <Navbar />
-                <div className={`container ${styles.container}`} style={{ textAlign: 'center', padding: '100px 0' }}>
-                    <h2>Your cart is empty</h2>
-                    <p>Go to the market to add some products.</p>
-                </div>
-                <Footer />
-            </main>
-        )
-    }
+    // Helper to format status
+    const getStatusLabel = (status) => {
+        switch (status) {
+            case 'verifying': return 'Menunggu Verifikasi';
+            case 'shipped': return 'Terverifikasi'; // As requested
+            case 'completed': return 'Selesai';
+            default: return 'Pending';
+        }
+    };
+
+    const getStatusColor = (status) => {
+        switch (status) {
+            case 'verifying': return 'orange';
+            case 'shipped': return 'green';
+            case 'completed': return 'teal';
+            default: return 'gray';
+        }
+    };
 
     return (
         <main>
             <Navbar />
-            <div className={`container ${styles.container}`}>
-                <div className={styles.cartList}>
-                    <h2 className={styles.sectionTitle}>Shopping Cart ({cart.length} items)</h2>
+            <div className={`container ${styles.container}`} style={{ flexDirection: 'column', gap: '40px' }}>
 
-                    {cart.map(item => (
-                        <div key={item.id} className={styles.item}>
-                            <div className={styles.itemInfo}>
-                                <div style={{ position: 'relative', width: 60, height: 60 }}>
-                                    <Image
-                                        src={item.image_url || item.image || '/assets/product-basket.png'}
-                                        fill
-                                        style={{ objectFit: 'cover', borderRadius: '8px' }}
-                                        alt={item.name}
+                {cart.length === 0 ? (
+                    <div style={{ textAlign: 'center', padding: '50px 0' }}>
+                        <h2>Keranjangmu masih kosong</h2>
+                        <Link href="/products" style={{ color: 'var(--color-moss-green)', textDecoration: 'underline' }}>
+                            Belanja di Market sekarang
+                        </Link>
+                    </div>
+                ) : (
+                    <div style={{ display: 'flex', gap: '30px', flexWrap: 'wrap' }}>
+                        <div className={styles.cartList} style={{ flex: 2 }}>
+                            <h2 className={styles.sectionTitle}>Keranjangmu ({cart.length} items)</h2>
+
+                            {cart.map(item => (
+                                <div key={item.id} className={styles.item}>
+                                    <div className={styles.itemInfo}>
+                                        <div style={{ position: 'relative', width: 60, height: 60 }}>
+                                            <Image
+                                                src={item.image_url || item.image || '/assets/product-basket.png'}
+                                                fill
+                                                style={{ objectFit: 'cover', borderRadius: '8px' }}
+                                                alt={item.name}
+                                            />
+                                        </div>
+                                        <div>
+                                            <h4>{item.name}</h4>
+                                            <span className="text-secondary">
+                                                Rp {Number(item.price).toLocaleString('id-ID')} x {item.quantity}
+                                            </span>
+                                            {item.address && (
+                                                <p style={{ fontSize: '0.85rem', color: '#666', marginTop: '4px', fontStyle: 'italic' }}>
+                                                    Note: {item.address}
+                                                </p>
+                                            )}
+                                        </div>
+                                    </div>
+                                    <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+                                        <span>Rp {Number(item.price * item.quantity).toLocaleString('id-ID')}</span>
+                                        <button
+                                            onClick={() => removeFromCart(item.id)}
+                                            style={{ background: 'none', border: 'none', color: 'red', cursor: 'pointer' }}
+                                        >
+                                            ✕
+                                        </button>
+                                    </div>
+                                </div>
+                            ))}
+
+                            <div className={styles.itemGroup}>
+                                <h3>Shipping Details</h3>
+                                <div className={styles.inputGroup}>
+                                    <label>Full Name</label>
+                                    <input
+                                        name="fullName"
+                                        type="text"
+                                        className={styles.input}
+                                        placeholder="John Doe"
+                                        onChange={handleInput}
                                     />
                                 </div>
-                                <div>
-                                    <h4>{item.name}</h4>
-                                    <span className="text-secondary">
-                                        Rp {Number(item.price).toLocaleString('id-ID')} x {item.quantity}
-                                    </span>
+                                <div className={styles.inputGroup}>
+                                    <label>Address</label>
+                                    <input
+                                        name="address"
+                                        type="text"
+                                        className={styles.input}
+                                        placeholder="Jl. Raya Tugu..."
+                                        onChange={handleInput}
+                                    />
+                                </div>
+                                <div className={styles.inputGroup}>
+                                    <label>City</label>
+                                    <input
+                                        name="city"
+                                        type="text"
+                                        className={styles.input}
+                                        placeholder="Bogor"
+                                        onChange={handleInput}
+                                    />
                                 </div>
                             </div>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                                <span>Rp {Number(item.price * item.quantity).toLocaleString('id-ID')}</span>
-                                <button
-                                    onClick={() => removeFromCart(item.id)}
-                                    style={{ background: 'none', border: 'none', color: 'red', cursor: 'pointer' }}
-                                >
-                                    ✕
-                                </button>
+                        </div>
+
+                        <div className={styles.summary} style={{ flex: 1 }}>
+                            <h2 className={styles.sectionTitle}>Order Summary</h2>
+                            <div style={{ marginBottom: '20px' }}>
+                                <div className="flex justify-between mb-2">
+                                    <span>Subtotal</span>
+                                    <span>Rp {total.toLocaleString('id-ID')}</span>
+                                </div>
+                                <div className="flex justify-between mb-2">
+                                    <span>Shipping (JNE)</span>
+                                    <span>Rp {shippingCost.toLocaleString('id-ID')}</span>
+                                </div>
                             </div>
-                        </div>
-                    ))}
 
-                    <div className={styles.itemGroup}>
-                        <h3>Shipping Details</h3>
-                        <div className={styles.inputGroup}>
-                            <label>Full Name</label>
-                            <input
-                                name="fullName"
-                                type="text"
-                                className={styles.input}
-                                placeholder="John Doe"
-                                onChange={handleInput}
-                            />
-                        </div>
-                        <div className={styles.inputGroup}>
-                            <label>Address</label>
-                            <input
-                                name="address"
-                                type="text"
-                                className={styles.input}
-                                placeholder="Jl. Raya Tugu..."
-                                onChange={handleInput}
-                            />
-                        </div>
-                        <div className={styles.inputGroup}>
-                            <label>City</label>
-                            <input
-                                name="city"
-                                type="text"
-                                className={styles.input}
-                                placeholder="Bogor"
-                                onChange={handleInput}
-                            />
+                            <div className={styles.totalRow}>
+                                <span>Total</span>
+                                <span>Rp {finalTotal.toLocaleString('id-ID')}</span>
+                            </div>
+
+                            <div className={styles.itemGroup}>
+                                <h3>Payment Method</h3>
+                                <div className={styles.paymentMethods}>
+                                    <button
+                                        className={`${styles.paymentBtn} ${paymentMethod === 'transfer' ? styles.active : ''}`}
+                                        onClick={() => setPaymentMethod('transfer')}
+                                    >
+                                        Bank Transfer
+                                    </button>
+                                </div>
+
+                                {paymentMethod === 'transfer' && (
+                                    <div className={styles.transferInfo}>
+                                        <p className={styles.bankDetail}>
+                                            <strong>BCA: 1234-5678-90</strong><br />
+                                            <strong>Mandiri: 9876-5432-10</strong><br />
+                                            a.n. Desa Wisata Tugu Utara
+                                        </p>
+                                        <div className={styles.uploadBox}>
+                                            <label>Upload Proof of Payment</label>
+                                            <input
+                                                type="file"
+                                                accept="image/*"
+                                                onChange={handleFileChange}
+                                                className={styles.fileInput}
+                                            />
+                                            {proofFile && <span className={styles.fileName}>{proofFile.name}</span>}
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+
+                            <button
+                                className="btn-primary"
+                                style={{ width: '100%', marginTop: '30px' }}
+                                onClick={handleCheckout}
+                                disabled={loading}
+                            >
+                                {loading ? 'Processing...' : 'Complete Order'}
+                            </button>
                         </div>
                     </div>
-                </div>
+                )}
 
-                <div className={styles.summary}>
-                    <h2 className={styles.sectionTitle}>Order Summary</h2>
-                    <div style={{ marginBottom: '20px' }}>
-                        <div className="flex justify-between mb-2">
-                            <span>Subtotal</span>
-                            <span>Rp {total.toLocaleString('id-ID')}</span>
-                        </div>
-                        <div className="flex justify-between mb-2">
-                            <span>Shipping (JNE)</span>
-                            <span>Rp {shippingCost.toLocaleString('id-ID')}</span>
+                {/* MY ORDERS SECTION */}
+                {myOrders.length > 0 && (
+                    <div style={{ width: '100%', borderTop: '2px solid #eee', paddingTop: '30px' }}>
+                        <h2 className={styles.sectionTitle}>Status Pesanan Anda</h2>
+                        <div style={{ overflowX: 'auto', background: 'white', padding: '20px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}>
+                            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+                                <thead>
+                                    <tr style={{ borderBottom: '2px solid #eee', textAlign: 'left' }}>
+                                        <th style={{ padding: '15px' }}>Order ID</th>
+                                        <th style={{ padding: '15px' }}>Date</th>
+                                        <th style={{ padding: '15px' }}>Total</th>
+                                        <th style={{ padding: '15px' }}>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {myOrders.map(order => (
+                                        <tr key={order.id} style={{ borderBottom: '1px solid #eee' }}>
+                                            <td style={{ padding: '15px' }}>#{order.id}</td>
+                                            <td style={{ padding: '15px' }}>{new Date(order.created_at).toLocaleDateString()}</td>
+                                            <td style={{ padding: '15px' }}>Rp {Number(order.total).toLocaleString('id-ID')}</td>
+                                            <td style={{ padding: '15px' }}>
+                                                <span style={{
+                                                    color: 'white',
+                                                    backgroundColor: getStatusColor(order.status),
+                                                    padding: '5px 15px',
+                                                    borderRadius: '20px',
+                                                    fontSize: '0.85rem',
+                                                    fontWeight: 'bold',
+                                                    display: 'inline-block'
+                                                }}>
+                                                    {getStatusLabel(order.status)}
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-
-                    <div className={styles.totalRow}>
-                        <span>Total</span>
-                        <span>Rp {finalTotal.toLocaleString('id-ID')}</span>
-                    </div>
-
-                    <div className={styles.itemGroup}>
-                        <h3>Payment Method</h3>
-                        <div className={styles.paymentMethods}>
-                            <button className={`${styles.paymentBtn} ${styles.active}`}>cod</button>
-                            <button className={styles.paymentBtn}>transfer</button>
-                        </div>
-                    </div>
-
-                    <button
-                        className="btn-primary"
-                        style={{ width: '100%', marginTop: '30px' }}
-                        onClick={handleCheckout}
-                        disabled={loading}
-                    >
-                        {loading ? 'Processing...' : 'Complete Order'}
-                    </button>
-                </div>
+                )}
             </div>
             <Footer />
         </main>

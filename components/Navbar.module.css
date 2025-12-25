@@ -24,7 +24,7 @@
 .logo {
     font-size: 1rem;
     font-weight: 700;
-    color: #faf5f5;
+    color: black;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
@@ -37,7 +37,7 @@
 .link {
     font-size: 1rem;
     font-weight: 500;
-    color: var(--color-text-main);
+    color: black;
     position: relative;
 }
 
@@ -53,7 +53,7 @@
     bottom: -4px;
     left: 0;
     backdrop-filter: blur(20px);
-    background-color: var(--color-moss-green);
+    background-color: black;
     transition: width 0.3s;
 }
 
@@ -70,7 +70,7 @@
 .cartIcon {
     font-size: 1.2rem;
     cursor: pointer;
-    color: var(--color-brown);
+    color: black;
 }
 
 @media (max-width: 768px) {
@@ -99,7 +99,7 @@
     .bar {
         width: 30px;
         height: 3px;
-        background-color: #ffffff;
+        background-color: black;
         border-radius: 10px;
         transition: all 0.3s linear;
         position: relative;
@@ -109,20 +109,20 @@
     /* Mobile Menu Container */
     .mobileMenu {
         position: absolute;
-        top: 70px;
+        top: 50px;
         /* Below navbar */
         left: 0;
         width: 100%;
-        background: rgba(12, 12, 12, 0.85);
+        background: rgb(182, 176, 176);
         backdrop-filter: blur(15px);
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 20px 0;
-        gap: 20px;
+        padding: 5px;
+        gap: 25px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         transform: translateY(-150%);
-        transition: transform 0.4s ease-in-out;
+        transition: transform 1s ease-in-out;
         z-index: 99;
     }
 

@@ -16,12 +16,11 @@ export default function Footer() {
                         <li><a href="/">Beranda</a></li>
                         <li><a href="/products">Pasar</a></li>
                         <li><a href="/sceneries">Wisata</a></li>
-
                         <li><a href="/cart">Keranjang</a></li>
                     </ul>
                 </div>
                 <div className={styles.column}>
-                    <h3>Contact</h3>
+                    <h3>Hubungi Kami</h3>
                     <p>Jl. Raya Puncak No. 779 Desa Tugu Utara Kecamatan Cisarua Kabupaten Bogor</p>
                     {/* <p>Email: contact@tuguutara.id</p> */}
                 </div>

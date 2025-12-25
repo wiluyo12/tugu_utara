@@ -6,17 +6,17 @@
 .header {
     text-align: center;
     margin-bottom: 60px;
-    animation: fadeIn 1s ease-out;
+    animation: fadeIn 2s ease-out;
 }
 
 .pageTitle {
     font-size: 3rem;
-    color: var(--color-wood);
+    color: black;
     margin-bottom: 15px;
 }
 
 .pageSubtitle {
-    color: var(--color-text-soft);
+    color: black;
     font-size: 1.1rem;
     max-width: 600px;
     margin: 0 auto;
