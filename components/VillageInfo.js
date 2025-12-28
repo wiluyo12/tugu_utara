@@ -28,7 +28,7 @@ export default function VillageInfo() {
             <div className={styles.container}>
                 <div className={styles.textContent}>
                     <span className={styles.label}>Tentang Kami</span>
-                    <h2 className={styles.title}>Permata Hijau di Jantung Puncak</h2>
+                    <h2 className={styles.title} style={{ color: 'black' }}>Permata Hijau di Jantung Puncak</h2>
                     <p className={styles.description}>
                         Desa Tugu Utara bukan sekadar destinasi wisata, melainkan sebuah warisan alam yang terjaga.
                         Terletak di ketinggian yang sejuk, desa kami menawarkan perpaduan sempurna antara
@@ -82,10 +82,7 @@ export default function VillageInfo() {
                         ))}
                     </div>
 
-                    <div className={styles.controls}>
-                        <button className={styles.btn} onClick={prev}>←</button>
-                        <button className={styles.btn} onClick={next}>→</button>
-                    </div>
+
                 </div>
             </div>
         </section>

@@ -4,6 +4,7 @@ import Image from 'next/image';
 import styles from './ProductCard.module.css';
 import { useCart } from '@/context/CartContext';
 import AddToCartNotification from './AddToCartNotification'; // Import notification logic
+import { supabase } from '@/lib/supabaseClient';
 
 import { useRouter } from 'next/navigation';
 
@@ -15,7 +16,14 @@ export default function ProductCard({ product }) {
     const [showNotification, setShowNotification] = useState(false); // State for notification
     const router = useRouter();
 
-    const handleAddToCart = () => {
+    const handleAddToCart = async () => {
+        // Enforce Login
+        const { data: { user } } = await supabase.auth.getUser();
+        if (!user) {
+            router.push('/login');
+            return;
+        }
+
         // Pass address along with product data
         addToCart({ ...product, address }, quantity);
         setIsAdded(true);

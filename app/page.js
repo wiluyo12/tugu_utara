@@ -8,10 +8,10 @@ import Link from 'next/link';
 
 export default function Home() {
   const featuredProducts = [
-    { id: 1, name: "Asinan Bogor", category: "Food", price: 15000, image: "/assets/asinanBogor.jpg" },
-    { id: 2, name: "Celengan Rotan", category: "Handcraft", price: 25000, image: "/assets/celenganRotan.png" }, // Reusing image for demo
-    { id: 3, name: "Kopi Liong", category: "Agricultural", price: 20000, image: "/assets/kopiLiong.png" },
-    { id: 4, name: "Keripik Singkong", category: "Food", price: 10000, image: "/assets/keripikSingkong.png" },
+    { id: 1, name: "Asinan Bogor", category: "Makanan", price: 15000, image: "/assets/asinanBogor.jpg" },
+    { id: 2, name: "Celengan Rotan", category: "Kerajinan Tangan", price: 25000, image: "/assets/celenganRotan.png" }, // Reusing image for demo
+    { id: 3, name: "Kopi Liong", category: "Pertanian", price: 20000, image: "/assets/kopiLiong.png" },
+    { id: 4, name: "Keripik Singkong", category: "Makanan", price: 10000, image: "/assets/keripikSingkong.png" },
 
   ];
 

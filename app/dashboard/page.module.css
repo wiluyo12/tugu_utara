@@ -1,0 +1,132 @@
+.container {
+    min-height: 80vh;
+    padding-top: 100px;
+    /* Space for fixed navbar */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 50px;
+    font-family: var(--font-outfit);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.heading {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-moss-green);
+}
+
+.profileSection {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    margin-bottom: 40px;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.avatarPlaceholder {
+    width: 80px;
+    height: 80px;
+    background: var(--color-secondary-green);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--color-moss-green);
+    font-weight: bold;
+}
+
+.profileInfo h2 {
+    margin: 0 0 5px 0;
+    color: #333;
+}
+
+.profileInfo p {
+    margin: 0;
+    color: #666;
+}
+
+.sectionTitle {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #333;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+.ordersTableContainer {
+    overflow-x: auto;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+.table th {
+    text-align: left;
+    padding: 15px 20px;
+    border-bottom: 2px solid #f0f0f0;
+    color: #555;
+    font-weight: 600;
+}
+
+.table td {
+    padding: 15px 20px;
+    border-bottom: 1px solid #f0f0f0;
+    color: #333;
+}
+
+.statusBadge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: white;
+    display: inline-block;
+}
+
+.logoutBtn {
+    background: #FF4D4D;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.logoutBtn:hover {
+    background: #e60000;
+}
+
+.emptyState {
+    text-align: center;
+    padding: 50px 0;
+    color: #777;
+}
+
+.loader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50vh;
+    font-size: 1.2rem;
+    color: var(--color-moss-green);
+}

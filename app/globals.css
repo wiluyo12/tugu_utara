@@ -44,7 +44,8 @@ h4,
 h5,
 h6 {
   font-weight: 600;
-  color: var(--color-wood);
+  /* colour font */
+  color: white;
   margin-bottom: 0.5em;
   line-height: 1.2;
 }
@@ -52,7 +53,7 @@ h6 {
 a {
   text-decoration: none;
   color: inherit;
-  transition: color 0.2s ease;
+  transition: color 1s ease;
 }
 
 button {
@@ -69,7 +70,7 @@ button {
 .glass-panel {
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  border: 1px solid whitesmoke;
   box-shadow: var(--shadow-md);
 }
 
@@ -78,26 +79,26 @@ button {
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 2s ease, box-shadow 2s ease;
 }
 
 .card:hover {
-  transform: scale(1.02);
+  transform: scale(2);
   /* Specific requirement: subtle smooth scale-up */
   box-shadow: var(--shadow-lg);
 }
 
 .btn-primary {
-  background-color: var(--color-moss-green);
+  background-color: whitesmoke;
   color: white;
   padding: 10px 20px;
   border-radius: 50px;
   border: none;
   cursor: pointer;
   font-weight: 500;
-  transition: background-color 0.2s;
+  transition: background-color 2s;
 }
 
 .btn-primary:hover {
-  background-color: var(--color-wood);
+  background-color: white;
 }

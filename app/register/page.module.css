@@ -1,0 +1,117 @@
+.container {
+    display: flex;
+    min-height: 100vh;
+    background-color: var(--color-off-white);
+}
+
+.imageSection {
+    flex: 1;
+    position: relative;
+    display: none;
+}
+
+.image {
+    object-fit: cover;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.formSection {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    background-color: var(--color-white);
+    overflow-y: auto;
+    /* Handle long form on small screens */
+}
+
+.formContainer {
+    width: 100%;
+    max-width: 500px;
+    /* Slightly wider for register form */
+}
+
+.heading {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+    color: var(--color-wood);
+}
+
+.label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: var(--color-wood);
+    font-size: 0.9rem;
+}
+
+.input,
+.textarea {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    color: var(--color-text-main);
+    transition: all 0.2s;
+    background-color: #fafafa;
+    margin-bottom: 15px;
+    font-family: inherit;
+}
+
+.textarea {
+    min-height: 80px;
+    resize: vertical;
+}
+
+.input:focus,
+.textarea:focus {
+    outline: none;
+    border-color: var(--color-moss-light);
+    background-color: white;
+    box-shadow: 0 0 0 3px rgba(74, 93, 35, 0.1);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.submitBtn {
+    width: 100%;
+    height: 48px;
+    background-color: var(--color-moss-green);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 10px;
+}
+
+.submitBtn:hover {
+    background-color: var(--color-wood);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.link {
+    color: var(--color-moss-green);
+    text-decoration: underline;
+}
+
+@media (min-width: 768px) {
+    .imageSection {
+        display: block;
+    }
+}

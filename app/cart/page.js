@@ -26,17 +26,21 @@ export default function Checkout() {
     const finalTotal = total + shippingCost;
 
     // Load orders from localStorage
+    // Load orders from Supabase (User specific)
     useEffect(() => {
         const fetchMyOrders = async () => {
-            const storedOrders = JSON.parse(localStorage.getItem('my_orders') || '[]');
-            if (storedOrders.length > 0) {
+            const { data: { session } } = await supabase.auth.getSession();
+
+            if (session?.user) {
                 const { data, error } = await supabase
                     .from('orders')
                     .select('*')
-                    .in('id', storedOrders)
+                    .eq('user_id', session.user.id)
                     .order('created_at', { ascending: false });
 
                 if (data) setMyOrders(data);
+            } else {
+                setMyOrders([]); // Clear orders if not logged in
             }
         };
 
@@ -88,6 +92,9 @@ export default function Checkout() {
             proofUrl = publicUrlData.publicUrl;
         }
 
+        // Get Current User
+        const { data: { user } } = await supabase.auth.getUser();
+
         const { data: order, error: orderError } = await supabase
             .from('orders')
             .insert([
@@ -97,7 +104,8 @@ export default function Checkout() {
                     city: formData.city,
                     total: finalTotal,
                     status: 'verifying', // Set to verifying for manual check
-                    payment_proof_url: proofUrl
+                    payment_proof_url: proofUrl,
+                    user_id: user ? user.id : null // Link order to user if logged in
                 }
             ])
             .select()
@@ -125,10 +133,10 @@ export default function Checkout() {
             console.error("Error creating items:", itemsError);
         }
 
-        // SAVE ORDER ID TO LOCAL STORAGE
-        const existingOrders = JSON.parse(localStorage.getItem('my_orders') || '[]');
-        const updatedOrders = [order.id, ...existingOrders];
-        localStorage.setItem('my_orders', JSON.stringify(updatedOrders));
+        // SAVE ORDER ID TO LOCAL STORAGE (Optional/Removed for strict user scoping)
+        // const existingOrders = JSON.parse(localStorage.getItem('my_orders') || '[]');
+        // const updatedOrders = [order.id, ...existingOrders];
+        // localStorage.setItem('my_orders', JSON.stringify(updatedOrders));
 
         setLoading(false);
         clearCart();
@@ -163,9 +171,9 @@ export default function Checkout() {
 
                 {cart.length === 0 ? (
                     <div style={{ textAlign: 'center', padding: '50px 0' }}>
-                        <h2>Keranjangmu masih kosong</h2>
-                        <Link href="/products" style={{ color: 'var(--color-moss-green)', textDecoration: 'underline' }}>
-                            Belanja di Market sekarang
+                        <h2 style={{ color: 'black' }}>Keranjangmu masih kosong</h2>
+                        <Link href="/products" style={{ color: 'black', textDecoration: 'underline' }}>
+                            Belanja di pasar sekarang
                         </Link>
                     </div>
                 ) : (
@@ -308,7 +316,7 @@ export default function Checkout() {
                 {/* MY ORDERS SECTION */}
                 {myOrders.length > 0 && (
                     <div style={{ width: '100%', borderTop: '2px solid #eee', paddingTop: '30px' }}>
-                        <h2 className={styles.sectionTitle}>Status Pesanan Anda</h2>
+                        <h2 className={styles.sectionTitle} style={{ color: 'black' }}>Status Pesanan Anda</h2>
                         <div style={{ overflowX: 'auto', background: 'white', padding: '20px', borderRadius: '8px', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}>
                             <table style={{ width: '100%', borderCollapse: 'collapse' }}>
                                 <thead>

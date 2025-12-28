@@ -36,7 +36,7 @@ export default function Market() {
             <div className={`container ${styles.container}`}>
                 <aside className={styles.sidebar}>
                     <div className={styles.filterGroup}>
-                        <h3 className={styles.filterTitle}>Kategori</h3>
+                        <h3 className={styles.filterTitle} style={{ color: 'black' }}>Kategori</h3>
                         <label className={styles.filterLabel}>
                             <input
                                 type="radio"
@@ -74,11 +74,11 @@ export default function Market() {
 
                 <div className={styles.main}>
                     <div className={styles.header}>
-                        <h2>Marketplace</h2>
+                        <h2 style={{ color: 'black' }}>Produk Kami</h2>
                     </div>
 
                     {loading ? (
-                        <p>Loading products...</p>
+                        <p>Tunggu yaaa...</p>
                     ) : (
                         <div className={styles.grid}>
                             {filteredProducts.map(p => (
