@@ -92,7 +92,7 @@
         border: none;
         cursor: pointer;
         padding: 0;
-        margin-right: 40px;
+        /* margin-right: 40px; Removed to fix alignment */
         z-index: 101;
     }
 
@@ -111,9 +111,11 @@
         position: absolute;
         top: 50px;
         /* Below navbar */
+        /* Below navbar */
         left: 0;
         width: 100%;
-        background: rgb(182, 176, 176);
+        background: rgba(255, 255, 255, 0.95);
+        /* White with high opacity for cleaner look */
         backdrop-filter: blur(15px);
         display: flex;
         flex-direction: column;
@@ -132,7 +134,8 @@
 
     .mobileMenu .link {
         font-size: 1.2rem;
-        color: #ffffff;
+        color: #333;
+        /* Dark text for better contrast on white */
     }
 }
 

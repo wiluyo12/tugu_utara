@@ -290,7 +290,7 @@ export default function AdminDashboard() {
 
                 {activeTab === 'orders' && (
                     <div className={styles.section}>
-                        <h3>Semua Pesanan</h3>
+                        <h3 style={{ color: 'black' }}>Semua Pesanan</h3>
                         <table style={{ width: '100%', marginTop: '20px', borderCollapse: 'collapse' }}>
                             <thead>
                                 <tr style={{ textAlign: 'left', borderBottom: '2px solid #eee' }}>
