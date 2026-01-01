@@ -74,62 +74,66 @@ export default function Register() {
 
     return (
         <div className={styles.container}>
-            {/* Left Side - Image */}
-            <div className={styles.imageSection}>
-                <Image
-                    src="/assets/desaBatuLayang.png"
-                    alt="Village Scenery"
-                    fill
-                    className={styles.image}
-                    priority
-                />
-                <div className={styles.overlay}></div>
-            </div>
+            <div className={styles.loginCard}>
+                {/* Left Side - Image */}
+                <div className={styles.imageSection}>
+                    <Image
+                        src="/assets/loginImage.jpg"
+                        alt="Village Scenery"
+                        fill
+                        className={styles.image}
+                        priority
+                    />
 
-            {/* Right Side - Form */}
-            <div className={styles.formSection}>
-                <div className={styles.formContainer}>
-                    <h1 className={styles.heading}>Daftar Akun</h1>
-                    <form onSubmit={handleRegister}>
-                        <div>
-                            <label className={styles.label}>Nama Lengkap</label>
-                            <input name="fullName" type="text" required onChange={handleChange} className={styles.input} />
-                        </div>
+                </div>
 
-                        <div className={styles.grid}>
-                            <div>
-                                <label className={styles.label}>Tempat Lahir</label>
-                                <input name="placeOfBirth" type="text" required onChange={handleChange} className={styles.input} />
+                {/* Right Side - Form */}
+                <div className={styles.formSection}>
+                    <div className={styles.formContainer}>
+                        <h1 className={styles.heading}>Daftar Akun</h1>
+                        <p className={styles.subHeading}>Bergabunglah bersama kami</p>
+
+                        <form onSubmit={handleRegister}>
+                            <div className={styles.formGroup}>
+                                <label className={styles.label}>Nama Lengkap</label>
+                                <input name="fullName" type="text" required onChange={handleChange} className={styles.input} placeholder="Masukan nama anda" />
                             </div>
-                            <div>
-                                <label className={styles.label}>Tanggal Lahir</label>
-                                <input name="dateOfBirth" type="date" required onChange={handleChange} className={styles.input} />
+
+                            <div className={styles.grid}>
+                                <div className={styles.formGroup}>
+                                    <label className={styles.label}>Tempat Lahir</label>
+                                    <input name="placeOfBirth" type="text" required onChange={handleChange} className={styles.input} placeholder="Masukan tempat lahir anda" />
+                                </div>
+                                <div className={styles.formGroup}>
+                                    <label className={styles.label}>Tanggal Lahir</label>
+                                    <input name="dateOfBirth" type="date" required onChange={handleChange} className={styles.input} placeholder="Masukan tanggal lahir anda" />
+                                </div>
                             </div>
-                        </div>
 
-                        <div>
-                            <label className={styles.label}>Alamat Lengkap</label>
-                            <textarea name="address" required onChange={handleChange} className={styles.textarea} />
-                        </div>
+                            <div className={styles.formGroup}>
+                                <label className={styles.label}>Alamat Lengkap</label>
+                                <textarea name="address" required onChange={handleChange} className={styles.textarea} placeholder="Masukan alamat lengkap anda" />
+                            </div>
 
-                        <div>
-                            <label className={styles.label}>Email</label>
-                            <input name="email" type="email" required onChange={handleChange} className={styles.input} />
-                        </div>
+                            <div className={styles.formGroup}>
+                                <label className={styles.label}>Email</label>
+                                <input name="email" type="email" required onChange={handleChange} className={styles.input} placeholder="Masukan email anda" />
+                            </div>
 
-                        <div>
-                            <label className={styles.label}>Kata Sandi</label>
-                            <input name="password" type="password" required onChange={handleChange} className={styles.input} />
-                        </div>
+                            <div className={styles.formGroup}>
+                                <label className={styles.label}>Kata Sandi</label>
+                                <input name="password" type="password" required onChange={handleChange} className={styles.input} placeholder="Masukan password anda" />
+                            </div>
 
-                        <button type="submit" disabled={loading} className={styles.submitBtn}>
-                            {loading ? 'Mendaftar...' : 'Daftar Sekarang'}
-                        </button>
+                            <button type="submit" disabled={loading} className={styles.submitBtn}>
+                                {loading ? 'Mendaftar...' : 'Daftar Sekarang'}
+                            </button>
 
-                        <p style={{ textAlign: 'center', marginTop: '15px', fontSize: '0.9rem', color: '#666' }}>
-                            Sudah punya akun? <Link href="/login" className={styles.link}>Masuk di sini</Link>
-                        </p>
-                    </form>
+                            <p style={{ textAlign: 'center', marginTop: '15px', fontSize: '0.8rem', color: '#666' }}>
+                                Sudah punya akun? <Link href="/login" className={styles.link}>Masuk di sini</Link>
+                            </p>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

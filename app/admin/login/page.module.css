@@ -1,24 +1,48 @@
 .container {
     display: flex;
-    min-height: 100vh;
-    background-color: var(--color-off-white);
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    background-color: white;
+}
+
+.loginCard {
+    display: flex;
+    width: 900px;
+    height: 600px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
 }
 
 .imageSection {
     flex: 1;
     position: relative;
-    display: none;
+    background-color: white;
 }
 
 .image {
     object-fit: cover;
 }
 
-.overlay {
+.textImage {
     position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.2);
-    /* Slight overlay for better text contrast if needed */
+    top: 30px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    z-index: 10;
+}
+
+.textImage p {
+    font-family: 'Great Vibes', cursive;
+    /* Assuming a script font is available or similar */
+    font-size: 3rem;
+    color: black;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    margin: 0;
 }
 
 .formSection {
@@ -27,30 +51,27 @@
     justify-content: center;
     align-items: center;
     padding: 40px;
-    background-color: var(--color-white);
+    background-color: white;
 }
 
 .formContainer {
     width: 100%;
-    max-width: 400px;
-    padding: 40px;
-    background: white;
-    /* Optional: Remove shadow/card style if using split screen plain background, 
-       but keeping it clean is good. */
+    max-width: 350px;
 }
 
 .heading {
     text-align: center;
-    margin-bottom: 30px;
-    font-size: 2rem;
-    color: var(--color-wood);
+    margin-bottom: 0px;
+    font-size: 2.5rem;
+    color: black;
+    /* Using brand color for header */
 }
 
 .subHeading {
     text-align: center;
     color: var(--color-text-soft);
-    margin-bottom: 40px;
-    font-size: 0.95rem;
+    margin-bottom: 30px;
+    font-size: 0.9rem;
 }
 
 .formGroup {
@@ -61,7 +82,8 @@
     display: block;
     margin-bottom: 8px;
     font-weight: 500;
-    color: var(--color-wood);
+    color: black;
+    /* Changed to brand color for visibility on white */
     font-size: 0.9rem;
 }
 
@@ -71,21 +93,21 @@
 
 .input {
     width: 100%;
-    height: 48px;
+    height: 30px;
     padding: 10px 15px;
-    border: 1px solid #e0e0e0;
-    border-radius: var(--radius-md);
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    /* Slightly rounder buttons */
     font-size: 1rem;
-    color: var(--color-text-main);
+    color: black;
     transition: all 0.2s;
-    background-color: #fafafa;
+    background-color: white;
 }
 
 .input:focus {
     outline: none;
-    border-color: var(--color-moss-light);
-    background-color: white;
-    box-shadow: 0 0 0 3px rgba(74, 93, 35, 0.1);
+    border-color: black;
+    box-shadow: 0 0 0 2px rgba(74, 93, 35, 0.1);
 }
 
 .toggleBtn {
@@ -96,43 +118,47 @@
     background: none;
     border: none;
     cursor: pointer;
-    color: var(--color-text-soft);
+    color: #999;
     display: flex;
     align-items: center;
     padding: 0;
 }
 
 .toggleBtn:hover {
-    color: var(--color-wood);
+    color: var(--color-moss-green);
 }
 
 .infoBox {
     background-color: var(--color-cream);
     padding: 15px;
-    border-radius: var(--radius-md);
+    border-radius: 8px;
     margin-bottom: 25px;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: var(--color-wood);
     border: 1px solid rgba(0, 0, 0, 0.05);
+    text-align: center;
 }
 
 .submitBtn {
     width: 100%;
     height: 48px;
     background-color: var(--color-moss-green);
+    /* Brand color button */
     color: white;
     border: none;
-    border-radius: 50px;
+    border-radius: 8px;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .submitBtn:hover {
-    background-color: var(--color-wood);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    background-color: var(--color-moss-light);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .submitBtn:disabled {
@@ -141,8 +167,21 @@
     transform: none;
 }
 
-@media (min-width: 768px) {
+/* Responsive adjustments */
+@media (max-width: 950px) {
+    .loginCard {
+        width: 90%;
+        height: auto;
+        min-height: 500px;
+        flex-direction: column;
+    }
+
     .imageSection {
-        display: block;
+        display: none;
+        /* Hide image on smaller screens to keep form accessible */
+    }
+
+    .formSection {
+        padding: 40px 20px;
     }
 }

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import styles from './Navbar.module.css';
+import Image from 'next/image';
 import { supabase } from '@/lib/supabaseClient';
 
 export default function Navbar() {
@@ -58,7 +59,15 @@ export default function Navbar() {
     return (
         <nav className={`${styles.navbar} ${isHomepage ? styles.fixed : ''}`}>
             <Link href="/" className={styles.logo}>
-                Tugu Utara
+                <Image
+                    src="/logo.png"
+                    alt="Tugu Utara Logo"
+                    width={40}
+                    height={40}
+                    className={styles.logoImage}
+                    priority
+                />
+                <span>Tugu Utara</span>
             </Link>
 
             {/* Desktop Links*/}

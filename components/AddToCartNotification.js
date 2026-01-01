@@ -39,7 +39,7 @@ export default function AddToCartNotification({ product, visible, onClose }) {
                 </div>
                 <div className={styles.content}>
                     <p className={styles.message}>
-                        <span>✓</span> Added to Cart
+                        <span>✓</span> masukan ke keranjang
                     </p>
                     <h4 className={styles.title}>{product.name}</h4>
                     <div className={styles.actions}>
@@ -47,13 +47,13 @@ export default function AddToCartNotification({ product, visible, onClose }) {
                             className={styles.cartBtn}
                             onClick={() => router.push('/cart')}
                         >
-                            View Cart
+                            Lihat Keranjang
                         </button>
                         <button
                             className={styles.closeBtn}
                             onClick={onClose}
                         >
-                            Continue Shopping
+                            Lanjut Belanja
                         </button>
                     </div>
                 </div>

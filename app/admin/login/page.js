@@ -31,84 +31,85 @@ export default function AdminLogin() {
 
     return (
         <div className={styles.container}>
-            {/* Left Side - Image */}
-            <div className={styles.imageSection}>
-                <Image
-                    src="/assets/riungGunung.png"
-                    alt="Tugu Utara Scenery"
-                    fill
-                    className={styles.image}
-                    priority
-                />
-                <div className={styles.overlay}></div>
-            </div>
+            <div className={styles.loginCard}>
+                {/* Left Side - Image */}
+                <div className={styles.imageSection}>
+                    <Image
+                        src="/assets/userLoginImage.png"
+                        alt="Tugu Utara Scenery"
+                        fill
+                        className={styles.image}
+                        priority
+                    />
+                </div>
 
-            {/* Right Side - Login Form */}
-            <div className={styles.formSection}>
-                <div className={styles.formContainer}>
-                    <h1 className={styles.heading}>Selamat Datang</h1>
-                    <p className={styles.subHeading}>Jadilah admin yang baik dan jujur </p>
+                {/* Right Side - Login Form */}
+                <div className={styles.formSection}>
+                    <div className={styles.formContainer}>
+                        <h1 className={styles.heading}>Selamat Datang</h1>
+                        <p className={styles.subHeading}>Jadilah admin yang baik dan jujur </p>
 
-                    <form onSubmit={handleLogin}>
-                        {/* EMAIL */}
-                        <div className={styles.formGroup}>
-                            <label className={styles.label}>Email</label>
-                            <input
-                                type="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                className={styles.input}
-                                required
-                                placeholder="Maukan E-Mail"
-                            />
-                        </div>
-
-                        {/* PASSWORD */}
-                        <div className={styles.formGroup}>
-                            <label className={styles.label}>Password</label>
-                            <div className={styles.inputWrapper}>
+                        <form onSubmit={handleLogin}>
+                            {/* EMAIL */}
+                            <div className={styles.formGroup}>
+                                <label className={styles.label}>Email</label>
                                 <input
-                                    type={showPassword ? "text" : "password"}
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
+                                    type="email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
                                     className={styles.input}
                                     required
-                                    placeholder="Masukan Pasword"
+                                    placeholder="Maukan E-Mail"
                                 />
-                                <button
-                                    type="button"
-                                    onClick={() => setShowPassword(!showPassword)}
-                                    className={styles.toggleBtn}
-                                    aria-label="Toggle password"
-                                >
-                                    {showPassword ? (
-                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                                            <path d="M3 3l18 18" />
-                                            <path d="M10.6 10.6a3 3 0 004.2 4.2" />
-                                            <path d="M9.9 4.2A10.4 10.4 0 0112 4.5c4.6 0 8.6 3 10 7.5a10.5 10.5 0 01-4.3 5.8" />
-                                            <path d="M6.2 6.2A10.5 10.5 0 002 12c1.4 4.5 5.4 7.5 10 7.5" />
-                                        </svg>
-                                    ) : (
-                                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                                            <path d="M2 12s4-7.5 10-7.5S22 12 22 12s-4 7.5-10 7.5S2 12 2 12z" />
-                                            <circle cx="12" cy="12" r="3" />
-                                        </svg>
-                                    )}
-                                </button>
                             </div>
-                        </div>
 
-                        {/* INFO LOGIN */}
-                        <div className={styles.infoBox}>
-                            <strong>Demo Credentials:</strong><br />
-                            Email: admin1@admin.com<br />
-                            Password: admin
-                        </div>
+                            {/* PASSWORD */}
+                            <div className={styles.formGroup}>
+                                <label className={styles.label}>Password</label>
+                                <div className={styles.inputWrapper}>
+                                    <input
+                                        type={showPassword ? "text" : "password"}
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                        className={styles.input}
+                                        required
+                                        placeholder="Masukan Pasword"
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={() => setShowPassword(!showPassword)}
+                                        className={styles.toggleBtn}
+                                        aria-label="Toggle password"
+                                    >
+                                        {showPassword ? (
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                                                <path d="M3 3l18 18" />
+                                                <path d="M10.6 10.6a3 3 0 004.2 4.2" />
+                                                <path d="M9.9 4.2A10.4 10.4 0 0112 4.5c4.6 0 8.6 3 10 7.5a10.5 10.5 0 01-4.3 5.8" />
+                                                <path d="M6.2 6.2A10.5 10.5 0 002 12c1.4 4.5 5.4 7.5 10 7.5" />
+                                            </svg>
+                                        ) : (
+                                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                                                <path d="M2 12s4-7.5 10-7.5S22 12 22 12s-4 7.5-10 7.5S2 12 2 12z" />
+                                                <circle cx="12" cy="12" r="3" />
+                                            </svg>
+                                        )}
+                                    </button>
+                                </div>
+                            </div>
 
-                        <button type="submit" disabled={loading} className={styles.submitBtn}>
-                            {loading ? "Signing in..." : "Sign In"}
-                        </button>
-                    </form>
+                            {/* INFO LOGIN */}
+                            <div className={styles.infoBox}>
+                                <strong>Demo Credentials:</strong><br />
+                                Email: admin1@admin.com<br />
+                                Password: admin
+                            </div>
+
+                            <button type="submit" disabled={loading} className={styles.submitBtn}>
+                                {loading ? "Signing in..." : "Sign In"}
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

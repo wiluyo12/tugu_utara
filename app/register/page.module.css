@@ -1,82 +1,110 @@
 .container {
     display: flex;
-    min-height: 100vh;
-    background-color: var(--color-off-white);
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    background-color: white;
+}
+
+.loginCard {
+    display: flex;
+    width: 900px;
+    height: 600px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
 }
 
 .imageSection {
     flex: 1;
     position: relative;
-    display: none;
+    background-color: white;
 }
 
 .image {
     object-fit: cover;
 }
 
-.overlay {
+.textImage {
     position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.2);
+    top: 30px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    z-index: 10;
 }
+
 
 .formSection {
     flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 40px 20px;
-    background-color: var(--color-white);
+    padding: 40px;
+    background-color: white;
     overflow-y: auto;
-    /* Handle long form on small screens */
+    /* Allow scrolling for longer register form */
 }
 
 .formContainer {
     width: 100%;
-    max-width: 500px;
-    /* Slightly wider for register form */
+    max-width: 350px;
 }
 
 .heading {
     text-align: center;
-    margin-bottom: 30px;
-    font-size: 2rem;
-    color: var(--color-wood);
+    margin-top: 5rem;
+    font-size: 1.5rem;
+    color: black;
+}
+
+.subHeading {
+    text-align: center;
+    color: var(--color-text-soft);
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+}
+
+.formGroup {
+    margin-bottom: 15px;
 }
 
 .label {
     display: block;
     margin-bottom: 5px;
     font-weight: 500;
-    color: var(--color-wood);
-    font-size: 0.9rem;
+    color: black;
+    font-size: 0.75rem;
 }
 
 .input,
 .textarea {
     width: 100%;
-    padding: 10px 15px;
-    border: 1px solid #e0e0e0;
-    border-radius: var(--radius-md);
-    font-size: 1rem;
-    color: var(--color-text-main);
+    height: 35px;
+    /* Slightly taller than login to accommodate more fields ease? Or keep 25px consistent? keeping 30px is safe middle or 25px like login */
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    color: black;
     transition: all 0.2s;
-    background-color: #fafafa;
-    margin-bottom: 15px;
+    background-color: white;
     font-family: inherit;
 }
 
 .textarea {
-    min-height: 80px;
+    height: 60px;
     resize: vertical;
+    padding: 10px;
 }
 
 .input:focus,
 .textarea:focus {
     outline: none;
-    border-color: var(--color-moss-light);
-    background-color: white;
-    box-shadow: 0 0 0 3px rgba(74, 93, 35, 0.1);
+    border-color: black;
+    box-shadow: 0 0 0 2px rgba(74, 93, 35, 0.1);
 }
 
 .grid {
@@ -87,22 +115,30 @@
 
 .submitBtn {
     width: 100%;
-    height: 48px;
+    height: 40px;
     background-color: var(--color-moss-green);
     color: white;
     border: none;
-    border-radius: 50px;
-    font-size: 1rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
     margin-top: 10px;
 }
 
 .submitBtn:hover {
-    background-color: var(--color-wood);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    background-color: var(--color-moss-light);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.submitBtn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
 }
 
 .link {
@@ -110,8 +146,20 @@
     text-decoration: underline;
 }
 
-@media (min-width: 768px) {
+/* Responsive adjustments */
+@media (max-width: 950px) {
+    .loginCard {
+        width: 90%;
+        height: auto;
+        min-height: 500px;
+        flex-direction: column;
+    }
+
     .imageSection {
-        display: block;
+        display: none;
+    }
+
+    .formSection {
+        padding: 40px 20px;
     }
 }

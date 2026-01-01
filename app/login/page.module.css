@@ -1,24 +1,33 @@
 .container {
     display: flex;
-    min-height: 100vh;
-    background-color: var(--color-off-white);
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    background-color: white;
+}
+
+.loginCard {
+    display: flex;
+    width: 900px;
+    height: 600px;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
 }
 
 .imageSection {
     flex: 1;
     position: relative;
-    display: none;
+    background-color: white;
 }
 
 .image {
     object-fit: cover;
 }
 
-.overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.2);
-}
+
 
 .formSection {
     flex: 1;
@@ -26,68 +35,122 @@
     justify-content: center;
     align-items: center;
     padding: 40px;
-    background-color: var(--color-white);
+    background-color: white;
 }
 
 .formContainer {
     width: 100%;
-    max-width: 400px;
-    padding: 20px;
+    max-width: 350px;
 }
 
 .heading {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 0px;
     font-size: 2rem;
-    color: var(--color-wood);
+    color: black;
+    /* Using brand color for header */
+}
+
+.subHeading {
+    text-align: center;
+    color: var(--color-text-soft);
+    margin-bottom: 30px;
+    font-size: 0.9rem;
+
+}
+
+.formGroup {
+    margin-bottom: 20px;
+
 }
 
 .label {
     display: block;
     margin-bottom: 8px;
     font-weight: 500;
-    color: var(--color-wood);
-    font-size: 0.9rem;
+    color: black;
+    /* Changed to brand color for visibility on white */
+    font-size: 0.75rem;
+}
+
+.inputWrapper {
+    position: relative;
 }
 
 .input {
     width: 100%;
-    height: 48px;
+    height: 25px;
     padding: 10px 15px;
-    border: 1px solid #e0e0e0;
-    border-radius: var(--radius-md);
-    font-size: 1rem;
-    color: var(--color-text-main);
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    /* Slightly rounder buttons */
+    font-size: 0.8rem;
+    color: black;
     transition: all 0.2s;
-    background-color: #fafafa;
-    margin-bottom: 20px;
+    background-color: white;
 }
 
 .input:focus {
     outline: none;
-    border-color: var(--color-moss-light);
-    background-color: white;
-    box-shadow: 0 0 0 3px rgba(74, 93, 35, 0.1);
+    border-color: black;
+    box-shadow: 0 0 0 2px rgba(74, 93, 35, 0.1);
+}
+
+.toggleBtn {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #999;
+    display: flex;
+    align-items: center;
+    padding: 0;
+}
+
+.toggleBtn:hover {
+    color: var(--color-moss-green);
+}
+
+.infoBox {
+    background-color: var(--color-cream);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    font-size: 0.8rem;
+    color: var(--color-wood);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    text-align: center;
 }
 
 .submitBtn {
     width: 100%;
     height: 48px;
     background-color: var(--color-moss-green);
+    /* Brand color button */
     color: white;
     border: none;
-    border-radius: 50px;
+    border-radius: 8px;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s;
-    margin-top: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .submitBtn:hover {
-    background-color: var(--color-wood);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    background-color: var(--color-moss-light);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.submitBtn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
 }
 
 .link {
@@ -95,8 +158,21 @@
     text-decoration: underline;
 }
 
-@media (min-width: 768px) {
+/* Responsive adjustments */
+@media (max-width: 950px) {
+    .loginCard {
+        width: 90%;
+        height: auto;
+        min-height: 500px;
+        flex-direction: column;
+    }
+
     .imageSection {
-        display: block;
+        display: none;
+        /* Hide image on smaller screens to keep form accessible */
+    }
+
+    .formSection {
+        padding: 40px 20px;
     }
 }

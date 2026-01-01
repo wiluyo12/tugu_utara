@@ -200,7 +200,7 @@ export default function AdminDashboard() {
                 {activeTab === 'products' && (
                     <div className={styles.section}>
                         <div style={{ background: '#f9f9f9', padding: '20px', borderRadius: '8px', marginBottom: '30px' }}>
-                            <h3>Tambah Produk Baru</h3>
+                            <h3 style={{ color: 'black' }}>Tambah Produk Baru</h3>
                             <form onSubmit={handleAddProduct} style={{ display: 'grid', gap: '15px', marginTop: '15px' }}>
                                 <div className={styles.formGrid}>
                                     <input

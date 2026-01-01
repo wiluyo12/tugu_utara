@@ -77,8 +77,9 @@
 .hamburger {
     display: none;
     position: fixed;
-    top: 20px;
-    right: 15px;
+    width: 30px;
+    height: 25px;
+    margin-right: 40px;
     z-index: 1100;
     background: transparent;
     color: black;
@@ -144,7 +145,7 @@
     border-radius: 5px;
     font-size: 1rem;
     box-sizing: border-box;
-    height: 48px;
+    height: 40px;
     /* Consistent height for all inputs */
 }
 

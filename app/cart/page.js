@@ -59,12 +59,12 @@ export default function Checkout() {
 
     const handleCheckout = async () => {
         if (!formData.fullName || !formData.address) {
-            alert("Please fill in shipping details");
+            alert("harap masukan nama dan alamat");
             return;
         }
 
         if (paymentMethod === 'transfer' && !proofFile) {
-            alert("Please upload proof of payment");
+            alert("harap upload bukti pembayaran");
             return;
         }
 
@@ -80,7 +80,7 @@ export default function Checkout() {
                 .upload(fileName, proofFile);
 
             if (uploadError) {
-                alert("Error uploading proof: " + uploadError.message);
+                alert("gagal mengunggah bukti pembayaran: " + uploadError.message);
                 setLoading(false);
                 return;
             }
@@ -112,7 +112,7 @@ export default function Checkout() {
             .single();
 
         if (orderError) {
-            alert("Order failed: " + orderError.message);
+            alert("Order gagal: " + orderError.message);
             setLoading(false);
             return;
         }
@@ -130,7 +130,7 @@ export default function Checkout() {
             .insert(orderItems);
 
         if (itemsError) {
-            console.error("Error creating items:", itemsError);
+            console.error("gagal membuat item:", itemsError);
         }
 
         // SAVE ORDER ID TO LOCAL STORAGE (Optional/Removed for strict user scoping)
@@ -140,7 +140,7 @@ export default function Checkout() {
 
         setLoading(false);
         clearCart();
-        alert("Order placed successfully! We will verify your payment shortly.");
+        alert("Order berhasil! Kami akan memverifikasi pembayaran Anda segera.");
         // We stay on the page to show the status
         window.location.reload();
     };
@@ -179,7 +179,7 @@ export default function Checkout() {
                 ) : (
                     <div style={{ display: 'flex', gap: '30px', flexWrap: 'wrap' }}>
                         <div className={styles.cartList} style={{ flex: 2 }}>
-                            <h2 className={styles.sectionTitle}>Keranjangmu ({cart.length} items)</h2>
+                            <h2 className={styles.sectionTitle} style={{ color: 'black' }}>Keranjangmu ({cart.length} items)</h2>
 
                             {cart.map(item => (
                                 <div key={item.id} className={styles.item}>
@@ -197,6 +197,11 @@ export default function Checkout() {
                                             <span className="text-secondary">
                                                 Rp {Number(item.price).toLocaleString('id-ID')} x {item.quantity}
                                             </span>
+                                            {item.description && (
+                                                <p style={{ fontSize: '0.85rem', color: '#666', marginTop: '4px', maxWidth: '300px' }}>
+                                                    {item.description}
+                                                </p>
+                                            )}
                                             {item.address && (
                                                 <p style={{ fontSize: '0.85rem', color: '#666', marginTop: '4px', fontStyle: 'italic' }}>
                                                     Note: {item.address}
@@ -219,32 +224,32 @@ export default function Checkout() {
                             <div className={styles.itemGroup}>
                                 <h3>Shipping Details</h3>
                                 <div className={styles.inputGroup}>
-                                    <label>Full Name</label>
+                                    <label>Nama Lengkap</label>
                                     <input
                                         name="fullName"
                                         type="text"
                                         className={styles.input}
-                                        placeholder="John Doe"
+                                        placeholder="masukan nama anda"
                                         onChange={handleInput}
                                     />
                                 </div>
                                 <div className={styles.inputGroup}>
-                                    <label>Address</label>
+                                    <label>Alamat</label>
                                     <input
                                         name="address"
                                         type="text"
                                         className={styles.input}
-                                        placeholder="Jl. Raya Tugu..."
+                                        placeholder="masukan alamat lengkap"
                                         onChange={handleInput}
                                     />
                                 </div>
                                 <div className={styles.inputGroup}>
-                                    <label>City</label>
+                                    <label>Kota</label>
                                     <input
                                         name="city"
                                         type="text"
                                         className={styles.input}
-                                        placeholder="Bogor"
+                                        placeholder="masukan nama kota"
                                         onChange={handleInput}
                                     />
                                 </div>
@@ -252,62 +257,53 @@ export default function Checkout() {
                         </div>
 
                         <div className={styles.summary} style={{ flex: 1 }}>
-                            <h2 className={styles.sectionTitle}>Order Summary</h2>
+                            <h2 className={styles.sectionTitle} style={{ color: 'black' }}>Rincian Pesanan anda</h2>
                             <div style={{ marginBottom: '20px' }}>
                                 <div className="flex justify-between mb-2">
-                                    <span>Subtotal</span>
+                                    <span>Total Harga</span>
                                     <span>Rp {total.toLocaleString('id-ID')}</span>
                                 </div>
                                 <div className="flex justify-between mb-2">
-                                    <span>Shipping (JNE)</span>
+                                    <span>Biaya Pengiriman (JNE)</span>
                                     <span>Rp {shippingCost.toLocaleString('id-ID')}</span>
                                 </div>
                             </div>
 
                             <div className={styles.totalRow}>
-                                <span>Total</span>
+                                <span>Total Harga</span>
                                 <span>Rp {finalTotal.toLocaleString('id-ID')}</span>
                             </div>
 
                             <div className={styles.itemGroup}>
-                                <h3>Payment Method</h3>
-                                <div className={styles.paymentMethods}>
-                                    <button
-                                        className={`${styles.paymentBtn} ${paymentMethod === 'transfer' ? styles.active : ''}`}
-                                        onClick={() => setPaymentMethod('transfer')}
-                                    >
-                                        Bank Transfer
-                                    </button>
+                                <h3 style={{ color: 'black' }}>Metode Pembayaran</h3>
+
+                                <div className={styles.transferInfo}>
+                                    <p className={styles.bankDetail}>
+                                        <strong>Untuk saat ini. Pembayaran hanya dapat dilakukan melalui transfer bank. </strong><br />
+                                        <strong>a/n. Desa Wisata Tugu Utara</strong><br />
+                                        <strong>BCA: 1234-5678-90</strong><br />
+                                        <strong>Mandiri: 9876-5432-10</strong><br />
+                                    </p>
+                                    <div className={styles.uploadBox}>
+                                        <label>Upload bukti pembayaran anda</label>
+                                        <input
+                                            type="file"
+                                            accept="image/*"
+                                            onChange={handleFileChange}
+                                            className={styles.fileInput}
+                                        />
+                                        {proofFile && <span className={styles.fileName}>{proofFile.name}</span>}
+                                    </div>
                                 </div>
 
-                                {paymentMethod === 'transfer' && (
-                                    <div className={styles.transferInfo}>
-                                        <p className={styles.bankDetail}>
-                                            <strong>BCA: 1234-5678-90</strong><br />
-                                            <strong>Mandiri: 9876-5432-10</strong><br />
-                                            a.n. Desa Wisata Tugu Utara
-                                        </p>
-                                        <div className={styles.uploadBox}>
-                                            <label>Upload Proof of Payment</label>
-                                            <input
-                                                type="file"
-                                                accept="image/*"
-                                                onChange={handleFileChange}
-                                                className={styles.fileInput}
-                                            />
-                                            {proofFile && <span className={styles.fileName}>{proofFile.name}</span>}
-                                        </div>
-                                    </div>
-                                )}
                             </div>
 
                             <button
-                                className="btn-primary"
-                                style={{ width: '100%', marginTop: '30px' }}
+                                className={styles.checkoutBtn}
                                 onClick={handleCheckout}
                                 disabled={loading}
                             >
-                                {loading ? 'Processing...' : 'Complete Order'}
+                                {loading ? 'memproses...' : 'pesan'}
                             </button>
                         </div>
                     </div>
